@@ -15,13 +15,18 @@
         android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/listbus"
         tools:layout_editor_absoluteX="7dp" />
-
-    <ListView
-        android:id="@+id/Listbus"
+    <Button
+        android:id="@+id/buttOnline"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="85dp" />
+        android:layout_height="70dp"
+        android:onClick="Onclick1"
+        android:text="รถประจำทางสาย1"
+        android:textSize="30dp" />
+    <fragment
+        android:id="@+id/mapTest"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        ></fragment>
 
 </LinearLayout>
