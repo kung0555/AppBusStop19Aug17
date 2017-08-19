@@ -65,7 +65,7 @@ public class input_offline extends AppCompatActivity {
 
                     TextView textView = (TextView) findViewById(R.id.RecommendinputbusStart);
                     startString = data.getStringExtra("BusStop");
-                    textView.setText("ป้ายเริ่มต้น ค่ือ " + data.getStringExtra("BusStop"));
+                    textView.setText("ป้ายเริ่มต้น คือ " + data.getStringExtra("BusStop"));
 
                     break;
                 case 1100:
