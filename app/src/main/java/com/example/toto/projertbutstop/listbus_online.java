@@ -103,21 +103,20 @@ public class listbus_online extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //for network
-        Location networkLocation = myFindLocation(LocationManager.NETWORK_PROVIDER);
-        if (networkLocation != null) {
-            latStartADouble = networkLocation.getLatitude();
-            lngStartADouble = networkLocation.getLongitude();
-        }
-        //for GPS
         Location gpsLocation = myFindLocation(LocationManager.GPS_PROVIDER);
+        Location networkLocation = myFindLocation(LocationManager.NETWORK_PROVIDER);
+        //for GPS
         if (gpsLocation != null) {
             latStartADouble = gpsLocation.getLatitude();
             lngStartADouble = gpsLocation.getLongitude();
-            Toast.makeText(getApplicationContext(), "MyLocationlat  "+latStartADouble +"\nMyLocationlng "+lngStartADouble, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "MyLocationLat  "+latStartADouble +"\nMyLocationLng "+lngStartADouble, Toast.LENGTH_SHORT).show();
 
+        }//for network
+        else if (networkLocation != null) {
+            latStartADouble = networkLocation.getLatitude();
+            lngStartADouble = networkLocation.getLongitude();
         }
-        if (gpsLocation == null) {
+        else if (gpsLocation == null) {
             Toast.makeText(getApplicationContext(), "ไม่มี GPS", Toast.LENGTH_SHORT).show();
         }
 
