@@ -27,6 +27,7 @@ public class notifications_online extends AppCompatActivity {
     private LocationManager locationManager;
     double latStartADouble;
     double lngStartADouble;
+    double dis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +67,8 @@ public class notifications_online extends AppCompatActivity {
             latChanged = location.getLatitude();
             lngChanged = location.getLongitude();
             Toast.makeText(getApplicationContext(), "LatChang  " + latChanged + "\nlngChang " + lngChanged, Toast.LENGTH_SHORT).show();
-            distance(LatBusStopEnd,LngBusStopEnd,latChanged,lngChanged);
+            dis= distance(LatBusStopEnd,LngBusStopEnd,latChanged,lngChanged);
+            Log.d("Test19","ระยะทางTest"+ dis+"กม.");
         }
 
         @Override
@@ -111,8 +113,6 @@ public class notifications_online extends AppCompatActivity {
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515 * 1.609344;
-
-        Log.d("Test19","ระยะทาง"+ dist+"กม.");
 
         return (dist);
     }
