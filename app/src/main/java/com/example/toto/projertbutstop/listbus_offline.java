@@ -13,16 +13,16 @@ public class listbus_offline extends AppCompatActivity {
 
     private String startString, endString;
     private String[] numberBusStrings;
-    private ArrayList<String> myTrueNumberBusStringArrayListinTown;
-    private ArrayList<String> myTrueNumberBusStringArrayListoutTown;
+    private ArrayList<String> myTrueNumberBusStartStringArrayListinTown;
+    private ArrayList<String> myTrueNumberBusStartStringArrayListoutTown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listbus_offline);
 
-        myTrueNumberBusStringArrayListinTown = new ArrayList<String>();
-        myTrueNumberBusStringArrayListoutTown = new ArrayList<String>();
+        myTrueNumberBusStartStringArrayListinTown = new ArrayList<String>();
+        myTrueNumberBusStartStringArrayListoutTown = new ArrayList<String>();
 
         //GetValue Intent
         getValueIntent();
@@ -68,8 +68,8 @@ public class listbus_offline extends AppCompatActivity {
 
         }   // for
 
-        Log.d(tag, "รถที่วิ่งผ่านป้าย Startไป ==> " + myTrueNumberBusStringArrayListinTown);
-        Log.d(tag, "รถที่วิ่งผ่านป้าย Startกลับ ==> " + myTrueNumberBusStringArrayListoutTown);
+        Log.d(tag, "รถที่วิ่งผ่านป้าย Startไป ==> " + myTrueNumberBusStartStringArrayListinTown);
+        Log.d(tag, "รถที่วิ่งผ่านป้าย Startกลับ ==> " + myTrueNumberBusStartStringArrayListoutTown);
 
 
     }   // findNumberBus
@@ -81,7 +81,7 @@ public class listbus_offline extends AppCompatActivity {
         for (int i=0;i<cursor.getCount();i++) {
 
             if (startString.equals(cursor.getString(4))) {
-                myTrueNumberBusStringArrayListoutTown.add(numberBusString);
+                myTrueNumberBusStartStringArrayListoutTown.add(numberBusString);
             }
             cursor.moveToNext();
 
@@ -96,7 +96,7 @@ public class listbus_offline extends AppCompatActivity {
         for (int i=0;i<cursor.getCount();i++) {
 
             if (startString.equals(cursor.getString(4))) {
-                myTrueNumberBusStringArrayListinTown.add(numberBusString);
+                myTrueNumberBusStartStringArrayListinTown.add(numberBusString);
             }
             cursor.moveToNext();
 
