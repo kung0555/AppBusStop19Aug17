@@ -79,8 +79,6 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
         public void onLocationChanged(Location location) {
             double latChanged = location.getLatitude();
             double lngChanged = location.getLongitude();
-            Toast.makeText(getApplicationContext(), "LatChang  " + latChanged + "\nlngChang " + lngChanged, Toast.LENGTH_SHORT).show();
-
         }
 
         @Override
@@ -98,6 +96,7 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
 
         }
     };
+
 
     public Location myFindLocation(String strProvider) {
         Location location = null;
@@ -125,7 +124,7 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
         if (LatLng != null) {
             latSearch = LatLng.getDouble("LatSearch");
             lngSearch = LatLng.getDouble("LngSearch");
-            Toast.makeText(getApplicationContext(), "รับLatSearch  " + latSearch + "\nรับLngSearch " + lngSearch, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "รับLatSearch  " + latSearch + "\nรับLngSearch " + lngSearch, Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -145,13 +144,12 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
         if (gpsLocation != null) {
             latStartADouble = gpsLocation.getLatitude();
             lngStartADouble = gpsLocation.getLongitude();
-            Toast.makeText(getApplicationContext(), "MyLocationLat  "+latStartADouble +"\nMyLocationLng "+lngStartADouble, Toast.LENGTH_SHORT).show();
-
-        }//for network
-        else if (networkLocation != null) {
-            latStartADouble = networkLocation.getLatitude();
-            lngStartADouble = networkLocation.getLongitude();
         }
+        //for network
+//        else if (networkLocation != null) {
+//            latStartADouble = networkLocation.getLatitude();
+//            lngStartADouble = networkLocation.getLongitude();
+//        }
         else if (gpsLocation == null) {
             Toast.makeText(getApplicationContext(), "ไม่มี GPS", Toast.LENGTH_SHORT).show();
         }
@@ -178,7 +176,7 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
     public void onDirectionSuccess(Direction direction, String rawBody) {
         String status = direction.getStatus();
         if (status.equals(RequestResult.OK)) {
-            Toast toast = Toast.makeText(this, "OK", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "ค้นหาเส้นทางสำเร็จ", Toast.LENGTH_LONG);
             toast.show();
 
 
