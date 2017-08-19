@@ -69,6 +69,16 @@ public class notifications_online extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "LatChang  " + latChanged + "\nlngChang " + lngChanged, Toast.LENGTH_SHORT).show();
             dis= distance(LatBusStopEnd,LngBusStopEnd,latChanged,lngChanged);
             Log.d("Test19","ระยะทางTest"+ dis+"กม.");
+            int pp = (int) dis;
+            Log.d("Test19","Testpp"+ pp+"กม.");
+            Toast.makeText(getApplicationContext(), "อีก  "+dis+"   ถึง   "+StopEnd, Toast.LENGTH_SHORT).show();
+            if (dis < 0.2&&dis>0.1) {
+                Toast.makeText(getApplicationContext(), "อีก200เมตร ถึง"+StopEnd, Toast.LENGTH_SHORT).show();
+            }
+            if (dis < 0.1) {
+                Toast.makeText(getApplicationContext(), "ถึง"+StopEnd+"แล้ว", Toast.LENGTH_SHORT).show();
+
+            }
         }
 
         @Override

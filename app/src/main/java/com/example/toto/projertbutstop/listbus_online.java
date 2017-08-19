@@ -157,8 +157,8 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
 
     }
     private void requestDirection() {
-        //LatLng origin = new LatLng(13.778512, 100.507915);
-        //LatLng destination = new LatLng(13.787855, 100.490267);
+        LatLng origin = new LatLng(13.778512, 100.507915);
+        LatLng destination = new LatLng(13.787855, 100.490267);
         GoogleDirection.withServerKey(serverKey)
                 .from(new LatLng(latStartADouble,lngStartADouble))
                 //.from(origin)
