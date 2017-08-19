@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/RecommendinputbusStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ป้ายรถประจำทางเริ่มต้น"
+        android:textSize="24dp"
+        android:layout_marginTop="10dp"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/InputbusStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="กรุณาใส่ป้ายรถประจำทางเริ่มต้น"
+        android:textSize="24dp"
+        android:layout_marginTop="10dp"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="67dp" />
+
+    <TextView
+        android:id="@+id/RecommendinputbusEnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ป้ายรถประจำทางจุดหมาย"
+        android:textSize="24dp"
+        android:layout_marginTop="10dp"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="125dp" />
+
+    <Button
+        android:id="@+id/InputbusEnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="กรุณาใส่ป้ายรถประจำทางเป้าหมาย"
+        android:textSize="24dp"
+        android:layout_marginTop="10dp"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="178dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/Ok"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="ตกลง"
+            android:textSize="24dp"
+            android:layout_marginTop="10dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="263dp" />
+
+        <Button
+            android:id="@+id/Cancel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="ยกเลิก"
+            android:textSize="24dp"
+            android:layout_marginTop="10dp"
+            tools:layout_editor_absoluteX="192dp"
+            tools:layout_editor_absoluteY="263dp"
+            android:onClick="OnclickCancel"/>
+    </LinearLayout>
+
+</LinearLayout>
