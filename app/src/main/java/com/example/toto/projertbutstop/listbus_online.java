@@ -1,6 +1,7 @@
 package com.example.toto.projertbutstop;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Criteria;
@@ -10,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -48,6 +50,8 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
     String x4;
     String x5;
     String x6;
+    double x7;
+    double x8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,14 +206,9 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
                 x4 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getDistance().getText();
                 x5 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getTransitDetail().getDepartureStopPoint().getName();
                 x6 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getTransitDetail().getArrivalStopPoint().getName();
+                x7 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getTransitDetail().getArrivalStopPoint().getLocation().getLatitude();
+                x8 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getTransitDetail().getArrivalStopPoint().getLocation().getLongitude();
                 b1.setText("รถประจำทางสาย " + x1);
-                /*tg1.setText("รถประจำทางสาย " + x1);
-                tg2.setText("ต้องผ่านทั้งหมด " + x2 + " ป้าย");
-                tg3.setText("วิ่งจาก " + x3);
-                tg4.setText("อีก " + x4);
-                tg5.setText("ป้ายรถประจำทางเริ่มต้น " +x5);
-                tg6.setText("ป้ายรถประจำทางปลายทาง "+x6);*/
-
             }
             else {
                 x1 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getTransitDetail().getLine().getShortName();
@@ -218,6 +217,8 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
                 x4 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getDistance().getText();
                 x5 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getTransitDetail().getDepartureStopPoint().getName();
                 x6 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getTransitDetail().getArrivalStopPoint().getName();
+                x7 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getTransitDetail().getArrivalStopPoint().getLocation().getLatitude();
+                x8 = direction.getRouteList().get(0).getLegList().get(0).getStepList().get(i).getTransitDetail().getArrivalStopPoint().getLocation().getLongitude();
                 b1.setText("รถประจำทางสาย " + x1);
 
             }
@@ -252,5 +253,18 @@ public class listbus_online extends AppCompatActivity implements OnMapReadyCallb
         this.googleMap = googleMap;
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latSearch, lngSearch), 16));
 
+    }
+    public void Onclick1(View view) {
+        Intent intentt = new Intent(listbus_online.this, notifications_online.class);
+        intentt.putExtra("รถประจำทางสาย", x1);
+        intentt.putExtra("ต้องผ่านทั้งหมด", x2);
+        intentt.putExtra("วิ่งจาก", x3);
+        intentt.putExtra("ระยะทาง", x4);
+        intentt.putExtra("ป้ายรถประจำทางเริ่มต้น", x5);
+        intentt.putExtra("ป้ายรถประจำทางปลายทาง", x6);
+        intentt.putExtra("LatBusStopEnd", x7);
+        intentt.putExtra("LngBusStopEnd", x8);
+
+        startActivity(intentt);
     }
 }
