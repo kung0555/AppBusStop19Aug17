@@ -13,14 +13,16 @@ public class listbus_offline extends AppCompatActivity {
 
     private String startString, endString;
     private String[] numberBusStrings;
-    private ArrayList<String> myTrueNumberBusStringArrayList;
+    private ArrayList<String> myTrueNumberBusStringArrayListinTown;
+    private ArrayList<String> myTrueNumberBusStringArrayListoutTown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listbus_offline);
 
-        myTrueNumberBusStringArrayList = new ArrayList<String>();
+        myTrueNumberBusStringArrayListinTown = new ArrayList<String>();
+        myTrueNumberBusStringArrayListoutTown = new ArrayList<String>();
 
         //GetValue Intent
         getValueIntent();
@@ -66,13 +68,24 @@ public class listbus_offline extends AppCompatActivity {
 
         }   // for
 
-        Log.d(tag, "รถที่วิ่งผ่านป้าย Start ==> " + myTrueNumberBusStringArrayList);
+        Log.d(tag, "รถที่วิ่งผ่านป้าย Startไป ==> " + myTrueNumberBusStringArrayListinTown);
+        Log.d(tag, "รถที่วิ่งผ่านป้าย Startกลับ ==> " + myTrueNumberBusStringArrayListoutTown);
 
 
     }   // findNumberBus
 
     private void outTownCheckBus(String numberBusString, SQLiteDatabase sqLiteDatabase) {
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM busrouteTABLE WHERE direction = 'ออกเมือง' AND bus = " + numberBusString, null);
+        cursor.moveToFirst();
+
+        for (int i=0;i<cursor.getCount();i++) {
+
+            if (startString.equals(cursor.getString(4))) {
+                myTrueNumberBusStringArrayListoutTown.add(numberBusString);
+            }
+            cursor.moveToNext();
+
+        }   // for
     }
 
     private void inTownCheckBus(String numberBusString, SQLiteDatabase sqLiteDatabase) {
@@ -83,7 +96,7 @@ public class listbus_offline extends AppCompatActivity {
         for (int i=0;i<cursor.getCount();i++) {
 
             if (startString.equals(cursor.getString(4))) {
-                myTrueNumberBusStringArrayList.add(numberBusString);
+                myTrueNumberBusStringArrayListinTown.add(numberBusString);
             }
             cursor.moveToNext();
 
