@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -38,7 +39,6 @@ public class listbus_offline extends AppCompatActivity {
         findNumberBusStart();
         findNumberBusEnd();
         findBusPast();
-        CreateListview();
 
 
 
@@ -211,19 +211,5 @@ public class listbus_offline extends AppCompatActivity {
 
 
     }
-
-    private void CreateListview() {
-        ListView listView = (ListView) findViewById(R.id.listbus);
-        Log.d("20AugV3", "ดูว่าbuspast  " + BusPast);
-        try {
-            String[] test = {"1","2","3"};
-
-            BusPast_Adapter busPast_adapter = new BusPast_Adapter(listbus_offline.this, BusPast,test);
-            listView.setAdapter(busPast_adapter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }   // Main Class
