@@ -22,11 +22,11 @@
         android:onClick="Onclick1"
         android:text="รถประจำทางสาย1"
         android:textSize="30dp" />
+
     <fragment
         android:id="@+id/mapTest"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        ></fragment>
+        android:layout_height="match_parent"></fragment>
 
 </LinearLayout>

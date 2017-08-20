@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class listbus_offline extends AppCompatActivity {
     private ArrayList<String> myTrueNumberBusStartStringArrayListoutTown;
     private ArrayList<String> myTrueNumberBusEndStringArrayListinTown;
     private ArrayList<String> myTrueNumberBusEndStringArrayListoutTown;
+    private ArrayList<String> BusPast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +30,36 @@ public class listbus_offline extends AppCompatActivity {
         myTrueNumberBusStartStringArrayListoutTown = new ArrayList<String>();
         myTrueNumberBusEndStringArrayListinTown = new ArrayList<String>();
         myTrueNumberBusEndStringArrayListoutTown = new ArrayList<String>();
+        BusPast = new ArrayList<String>();
         //GetValue Intent
         getValueIntent();
 
         //Find NumberBus
         findNumberBusStart();
         findNumberBusEnd();
+        findBusPast();
+        CreateListview();
 
 
 
     }   // Main Method
+
+    private void findBusPast() {
+
+        for (int i=0;i<myTrueNumberBusStartStringArrayListinTown.size();i++) {
+            for (int h =0 ;h<myTrueNumberBusEndStringArrayListinTown.size();h++) {
+                if (myTrueNumberBusStartStringArrayListinTown.get(i).equals(myTrueNumberBusEndStringArrayListinTown.get(h))) {
+                    BusPast.add(myTrueNumberBusStartStringArrayListinTown.get(i));
+                }
+            }
+
+        }
+        Log.d("20AugV2", "BusPastStart  " + BusPast);
+        Log.d("20AugV2", "รถที่วิ่งผ่านป้าย Startไป ==> " + myTrueNumberBusStartStringArrayListinTown);
+        Log.d("20AugV2", "รถที่วิ่งผ่านป้าย Endไป ==> " + myTrueNumberBusEndStringArrayListinTown);
+    }
+
+
 
     private void findNumberBusEnd() {
         String tag = "18AugV4";
@@ -102,6 +124,7 @@ public class listbus_offline extends AppCompatActivity {
             cursor.moveToNext();
 
         }   // for
+
     }
 
     private void findNumberBusStart() {
@@ -139,11 +162,11 @@ public class listbus_offline extends AppCompatActivity {
 
         }   // for
 
-        Log.d("20AugV1", "รถที่วิ่งผ่านป้าย Startไป ==> " + myTrueNumberBusStartStringArrayListinTown);
-        Log.d("20AugV1", "รถที่วิ่งผ่านป้าย Startกลับ ==> " + myTrueNumberBusStartStringArrayListoutTown);
+
 
 
     }   // findNumberBusSart
+
 
 
 
@@ -188,5 +211,19 @@ public class listbus_offline extends AppCompatActivity {
 
 
     }
+
+    private void CreateListview() {
+        ListView listView = (ListView) findViewById(R.id.listbus);
+        Log.d("20AugV3", "ดูว่าbuspast  " + BusPast);
+        try {
+            String[] test = {"1","2","3"};
+
+            BusPast_Adapter busPast_adapter = new BusPast_Adapter(listbus_offline.this, BusPast,test);
+            listView.setAdapter(busPast_adapter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }   // Main Class
