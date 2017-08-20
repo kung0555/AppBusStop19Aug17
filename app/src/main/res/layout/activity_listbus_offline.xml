@@ -13,7 +13,6 @@
         android:text="เลือกสายรถประจำทางในการเดินทาง"
         android:textSize="24dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/listbus"
         tools:layout_editor_absoluteX="7dp" />
 
     <ListView

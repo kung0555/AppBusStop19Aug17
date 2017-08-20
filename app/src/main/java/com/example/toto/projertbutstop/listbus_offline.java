@@ -21,17 +21,22 @@ public class listbus_offline extends AppCompatActivity {
     private ArrayList<String> myTrueNumberBusEndStringArrayListinTown;
     private ArrayList<String> myTrueNumberBusEndStringArrayListoutTown;
     private ArrayList<String> BusPast;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listbus_offline);
-
+        listView = (ListView) findViewById(R.id.Listbus);
         myTrueNumberBusStartStringArrayListinTown = new ArrayList<String>();
         myTrueNumberBusStartStringArrayListoutTown = new ArrayList<String>();
         myTrueNumberBusEndStringArrayListinTown = new ArrayList<String>();
         myTrueNumberBusEndStringArrayListoutTown = new ArrayList<String>();
         BusPast = new ArrayList<String>();
+
+
+
+
         //GetValue Intent
         getValueIntent();
 
@@ -50,10 +55,13 @@ public class listbus_offline extends AppCompatActivity {
             for (int h =0 ;h<myTrueNumberBusEndStringArrayListinTown.size();h++) {
                 if (myTrueNumberBusStartStringArrayListinTown.get(i).equals(myTrueNumberBusEndStringArrayListinTown.get(h))) {
                     BusPast.add(myTrueNumberBusStartStringArrayListinTown.get(i));
+
                 }
             }
 
         }
+        BusPart_Adapter adapter = new BusPart_Adapter(listbus_offline.this,BusPast);
+        listView.setAdapter(adapter);
         Log.d("20AugV2", "BusPastStart  " + BusPast);
         Log.d("20AugV2", "รถที่วิ่งผ่านป้าย Startไป ==> " + myTrueNumberBusStartStringArrayListinTown);
         Log.d("20AugV2", "รถที่วิ่งผ่านป้าย Endไป ==> " + myTrueNumberBusEndStringArrayListinTown);
@@ -211,5 +219,7 @@ public class listbus_offline extends AppCompatActivity {
 
 
     }
+
+    TeatBusPart teatBusPart = new TeatBusPart(BusPast);
 
 }   // Main Class
