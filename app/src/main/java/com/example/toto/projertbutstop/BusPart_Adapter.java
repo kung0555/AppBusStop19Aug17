@@ -54,6 +54,7 @@ public class BusPart_Adapter extends BaseAdapter {
         }
 
         Log.d("20AugV5", "buspart   " + i);
+
         return view;
     }
 }
