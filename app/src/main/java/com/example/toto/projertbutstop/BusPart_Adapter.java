@@ -26,7 +26,7 @@ public class BusPart_Adapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (busPast == null) {
+        if (busPast.isEmpty()) {
             return 1;
         } else {
             return busPast.size();
@@ -50,8 +50,8 @@ public class BusPart_Adapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.buspart_item, parent, false);
         TextView t = view.findViewById(R.id.item);
-        if (busPast == null) {
-            t.setText("รถประจำทางผ่าน");
+        if (busPast.isEmpty()) {
+            t.setText("ไม่มีสายรถประจำทางผ่าน กดเลือกเพื่อใส่ป้ายรถประจำทางอีกครั้ง");
         } else {
             for (int a = 0; a < busPast.size(); a++) {
                 t.setText("รถประจำทางสาย "+busPast.get(i));

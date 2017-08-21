@@ -50,6 +50,7 @@ public class listbus_offline extends AppCompatActivity {
         findNumberBusStart();
         findNumberBusEnd();
         findBusPast();
+        getRotuStrat();
 
 
 
@@ -69,15 +70,27 @@ public class listbus_offline extends AppCompatActivity {
         //createAdapter
         BusPart_Adapter adapter = new BusPart_Adapter(listbus_offline.this,BusPast);
         listView.setAdapter(adapter);
+        if (BusPast.isEmpty()) {
+            Toast.makeText(listbus_offline.this, "ไม่มีสายรถประจำทางผ่าน", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(listbus_offline.this, "กรุณาเลือกสายรถประจำทาง", Toast.LENGTH_SHORT).show();
+        }
         //Active Click
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (BusPast.isEmpty()) {
+                    Log.d("21Aug1", "BusPastStart  " + BusPast);
+                    Intent intent = new Intent(listbus_offline.this, input_offline.class);
+                    startActivity(intent);
 
-                strNumBus = BusPast.get(i);
-                Log.d("21Aug1", "BusPastStart  " + strNumBus);
-                Intent intent = new Intent(listbus_offline.this, notifications_offline.class);
-                startActivity(intent);
+                } else {
+                    strNumBus = BusPast.get(i);
+                    Intent intent = new Intent(listbus_offline.this, notifications_offline.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -141,7 +154,7 @@ public class listbus_offline extends AppCompatActivity {
 
     private void inTownCheckBusEnd(String numberBusString, SQLiteDatabase sqLiteDatabase) {
 
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM busrouteTABLE WHERE direction = 'เข้าเมือง' AND bus = " + numberBusString, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM busrouteTABLE WHERE  bus = " + numberBusString, null);
         cursor.moveToFirst();
 
         for (int i = 0; i < cursor.getCount(); i++) {
@@ -214,7 +227,7 @@ public class listbus_offline extends AppCompatActivity {
 
     private void inTownCheckBus(String numberBusString, SQLiteDatabase sqLiteDatabase) {
 
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM busrouteTABLE WHERE direction = 'เข้าเมือง' AND bus = " + numberBusString, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM busrouteTABLE WHERE bus = " + numberBusString, null);
         cursor.moveToFirst();
 
         for (int i=0;i<cursor.getCount();i++) {
@@ -238,6 +251,42 @@ public class listbus_offline extends AppCompatActivity {
         Log.d(tag, "rev End ==> " + endString);
 
 
+    }
+
+    private void getRotuStrat() {
+        //String testBus = strNumBus;
+        String BusStrat = startString;
+        String tag = "RoutStart";
+        ArrayList<String> RstringArrayList = new ArrayList<String>();
+        ArrayList<String> RstringArrayList2 = new ArrayList<String>();
+        ArrayList<String> RstringArrayList3 = new ArrayList<String>();
+        ArrayList<String> RstringArrayList4 = new ArrayList<String>();
+        SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.DATABASE_NAME,
+                MODE_PRIVATE, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM busrouteTABLE WHERE bus = " + strNumBus, null);
+        cursor.moveToFirst();
+        String[] RStrings = new String[cursor.getCount()];
+        String[] RStrings2 = new String[cursor.getCount()];
+        String[] RStrings3 = new String[cursor.getCount()];
+        for (int i = 0; i < RStrings.length; i++) {
+            RStrings[i] = cursor.getString(4);
+            RStrings2[i] = cursor.getString(0);
+            RStrings3[i] = cursor.getString(1);
+            Log.d(tag, "bus[" + i + "] ==> " + RStrings[i]);
+            RstringArrayList.add(RStrings[i]);
+            if (BusStrat.equals(cursor.getString(4))) {
+                RstringArrayList2.add(RstringArrayList.get(i));
+                RstringArrayList3.add(RStrings2[i]);
+                RstringArrayList4.add(RStrings3[i]);
+                BusStrat = endString;
+                if (BusStrat.equals(cursor.getString(4))) {
+                    BusStrat = "x";
+                }
+            }
+            Log.d(tag, "ID[[" + RstringArrayList3 + "]] ==>" + "Direction ==>" + RstringArrayList4 + "Bus==>" + RstringArrayList2 );
+            cursor.moveToNext();
+        } //for
+        cursor.close();
     }
 
 

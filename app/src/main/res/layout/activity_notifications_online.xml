@@ -127,7 +127,8 @@
 หน้าหลัก"
             android:textSize="24dp"
             tools:layout_editor_absoluteX="195dp"
-            tools:layout_editor_absoluteY="368dp" />
+            tools:layout_editor_absoluteY="368dp"
+            android:onClick="OnclickBackEnd"/>
     </LinearLayout>
 
 </LinearLayout>

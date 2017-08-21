@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class input_offline extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class input_offline extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_offline);
+        Toast.makeText(input_offline.this, "กรุณาใส่ป้ายรถประจำทาง", Toast.LENGTH_SHORT).show();
 
         //Start Controller
         startController();

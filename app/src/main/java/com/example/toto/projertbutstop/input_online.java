@@ -36,7 +36,7 @@ public class input_online extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_online);
-        Toast.makeText(this,"ใส่ป้ายรถประจำทางที่ต้องการ",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "ใส่ป้ายรถประจำทางที่ต้องการ", Toast.LENGTH_SHORT).show();
         ButterKnife.bind(this);
     }
 
@@ -76,14 +76,16 @@ public class input_online extends AppCompatActivity {
 
             double lat = address.getLatitude();
             double lng = address.getLongitude();
-            Toast.makeText(this,locality+"ละติจูด"+lat+"ลองติจูด"+lng,Toast.LENGTH_LONG).show();
+            Toast.makeText(this, locality + "ละติจูด" + lat + "ลองติจูด" + lng, Toast.LENGTH_LONG).show();
 
+            if (address != null) {
+                Intent intent = new Intent(input_online.this, listbus_online.class);
+                intent.putExtra("LatSearch", lat);
+                intent.putExtra("LngSearch", lng);
+                startActivity(intent);
+                //finish();
+            }
 
-            Intent intent = new Intent(input_online.this, listbus_online.class);
-            intent.putExtra("LatSearch", lat);
-            intent.putExtra("LngSearch", lng);
-            startActivity(intent);
-            //finish();
         }
     }
 
@@ -103,7 +105,7 @@ public class input_online extends AppCompatActivity {
             InputbusEnd.setText("");
             String name = resultList.get(0);
             InputbusEnd.setText(name);
-            Toast.makeText(this,name,Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
         }
     }
 }
