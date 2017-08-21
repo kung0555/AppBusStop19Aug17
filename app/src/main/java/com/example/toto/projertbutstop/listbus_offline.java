@@ -106,6 +106,7 @@ public class listbus_offline extends AppCompatActivity {
                         intent.putExtra("LatBus", LstringArrayList);
                         intent.putExtra("LngBus", LstringArrayList2);
                         intent.putExtra("NameBus", LstringArrayList3);
+                        intent.putExtra("Bus", strNumBus);
                         startActivity(intent);
                     }
 

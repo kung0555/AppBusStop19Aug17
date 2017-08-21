@@ -10,7 +10,11 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class notifications_offline extends AppCompatActivity {
     private LocationManager locationManager;
@@ -19,11 +23,45 @@ public class notifications_offline extends AppCompatActivity {
     double latStartADouble;
     double lngStartADouble;
     double dis;
+    String Bus;
+    int SumBus;
+    ArrayList<String> LatBus = new ArrayList<String>();
+    ArrayList<String> LngBus = new ArrayList<String>();
+    ArrayList<String> NameBus = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications_offline);
         setupLocation();
+        getValueIntent();
+    }
+
+
+    private void getValueIntent() {
+
+        String tag = "getValueIntent";
+        SumBus = getIntent().getIntExtra("SumBus",0);
+        LatBus = getIntent().getStringArrayListExtra("LatBus");
+        LngBus = getIntent().getStringArrayListExtra("LngBus");
+        NameBus = getIntent().getStringArrayListExtra("NameBus");
+        Bus = getIntent().getStringExtra("Bus");
+        String strSumBut = Integer.toString(SumBus);
+        //Log.d(tag,"SumBus ==>"+ SumBus);
+        Log.d(tag,"LatBus ==>"+ LatBus);
+        Log.d(tag,"LngBus ==>"+ LngBus);
+        Log.d(tag,"NameBus ==>"+ NameBus);
+        Log.d(tag,"NameBus ==>"+ Bus);
+
+        TextView tg1 = (TextView) findViewById(R.id.NumberbusOff);
+        TextView tg2 = (TextView) findViewById(R.id.Namebus1Off);
+        TextView tg3 = (TextView) findViewById(R.id.Namebus2Off);
+        TextView tg4 = (TextView) findViewById(R.id.NumberbusstopOff);
+
+        tg1.setText("รถประจำทางสาย "+Bus);
+        tg2.setText("ชื่อป้ายรถประจำทางปัจจุบัน : "+NameBus.get(0));
+        tg3.setText("ชื่อป้ายรถประจำทางถัดไป : "+NameBus.get(1));
+        tg4.setText("ต้องผ่านอีก "+strSumBut+" ป้าย");
+
     }
     private void setupLocation() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -57,6 +95,10 @@ public class notifications_offline extends AppCompatActivity {
             latChanged = location.getLatitude();
             lngChanged = location.getLongitude();
             Toast.makeText(getApplicationContext(), "LatChang  " + latChanged + "\nlngChang " + lngChanged, Toast.LENGTH_SHORT).show();
+            for (int i = 0; i < LatBus.size(); i++) {
+                //dis = distance(LatBus.get(i), LngBus.get(i), latChanged, lngChanged);
+            }
+
         }
 
         @Override
@@ -112,4 +154,9 @@ public class notifications_offline extends AppCompatActivity {
     private static double deg2rad(double deg) {
         return (deg * Math.PI / 180.0);
     }
+
+    public void OnclickEnd(View view) {
+        finish();
+    }
 }
+

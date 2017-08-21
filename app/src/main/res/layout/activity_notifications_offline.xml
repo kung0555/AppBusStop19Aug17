@@ -16,27 +16,19 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <TextView
-        android:id="@+id/Numberbus"
+        android:id="@+id/NumberbusOff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="สายรถประจำทาง : 56"
         android:textSize="24dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/Recommend"
         tools:layout_editor_absoluteX="8dp" />
 
-    <TextView
-        android:id="@+id/Nowbus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ชื่อป้ายรถประจำทางปัจจุบัน :"
-        android:textSize="24dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/Numberbus"
-        tools:layout_editor_absoluteX="8dp" />
+
 
     <TextView
-        android:id="@+id/Namebus1"
+        android:id="@+id/Namebus1Off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="มหาวิทยาลัยราฏภัฏสวนสุนันทา"
@@ -45,18 +37,10 @@
         app:layout_constraintTop_toBottomOf="@+id/Nowbus"
         tools:layout_editor_absoluteX="8dp" />
 
-    <TextView
-        android:id="@+id/Nextbus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ชื่อป้ายรถประจำทางถัดไป :"
-        android:textSize="24dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/Namebus1"
-        tools:layout_editor_absoluteX="8dp" />
+
 
     <TextView
-        android:id="@+id/Namebus2"
+        android:id="@+id/Namebus2Off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -66,24 +50,15 @@
         tools:layout_editor_absoluteX="8dp" />
 
     <TextView
-        android:id="@+id/Numberbusstop"
+        android:id="@+id/NumberbusstopOff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="เหลือจำนวนป้ายที่ต้องผ่านอีก 9 ป้าย"
         android:textSize="24dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/Namebus2"
         tools:layout_editor_absoluteX="8dp" />
 
-    <TextView
-        android:id="@+id/Status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="สถานะการเดินทาง :"
-        android:textSize="24dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/Numberbusstop"
-        tools:layout_editor_absoluteX="8dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -112,7 +87,8 @@
 หน้าหลัก"
             android:textSize="24dp"
             tools:layout_editor_absoluteX="195dp"
-            tools:layout_editor_absoluteY="368dp" />
+            tools:layout_editor_absoluteY="368dp"
+            android:onClick="OnclickEnd"/>
     </LinearLayout>
 
 </LinearLayout>
