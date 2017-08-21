@@ -27,6 +27,10 @@ public class listbus_offline extends AppCompatActivity {
     private ArrayList<String> BusPast;
     String strNumBus;
     ListView listView;
+    int test;
+    ArrayList<String> LstringArrayList = new ArrayList<String>();
+    ArrayList<String> LstringArrayList2 = new ArrayList<String>();
+    ArrayList<String> LstringArrayList3 = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,10 @@ public class listbus_offline extends AppCompatActivity {
                     if (strNumBus != null) {
                         getRouteBus();
                         Intent intent = new Intent(listbus_offline.this, notifications_offline.class);
+                        intent.putExtra("SumBus", test);
+                        intent.putExtra("LatBus", LstringArrayList);
+                        intent.putExtra("LngBus", LstringArrayList2);
+                        intent.putExtra("NameBus", LstringArrayList3);
                         startActivity(intent);
                     }
 
@@ -307,15 +315,14 @@ public class listbus_offline extends AppCompatActivity {
             int IDStrat = Integer.parseInt(RstringArrayList3.get(0));
             int IDEnd = Integer.parseInt(RstringArrayList3.get(1));
             Log.d(tag2, "ID[[" + IDStrat + " - " + IDEnd + "]]");
-            ArrayList<String> LstringArrayList = new ArrayList<String>();
-            ArrayList<String> LstringArrayList2 = new ArrayList<String>();
             SQLiteDatabase sqLiteDatabase2 = openOrCreateDatabase(MyOpenHelper.DATABASE_NAME,
                     MODE_PRIVATE, null);
             Cursor cursor2 = sqLiteDatabase2.rawQuery("SELECT * FROM busrouteTABLE WHERE bus = " + GBus, null);
             cursor2.moveToFirst();
             String[] Lat = new String[cursor2.getCount()];
             String[] Lug = new String[cursor2.getCount()];
-            int test = (IDEnd-IDStrat)+1;
+            String[] Name = new String[cursor2.getCount()];
+            test = (IDEnd-IDStrat)+1;
             for (int i = 0; i <= Lat.length; i++) {
                 if (RstringArrayList3.get(0).equals(cursor2.getString(0))) {
                     int x =i;
@@ -324,8 +331,10 @@ public class listbus_offline extends AppCompatActivity {
                         Log.d(tag, "Bus ==>" + x);
                         Lat[x] = cursor2.getString(5);
                         Lug[x] = cursor2.getString(6);
+                        Name[x] = cursor2.getString(4);
                         LstringArrayList.add(Lat[x]);
                         LstringArrayList2.add(Lug[x]);
+                        LstringArrayList3.add(Name[x]);
                         cursor2.moveToNext();
                         //Log.d(tag, "ป้ายทั้งหมดที่ต้องถาม ==>"+test+" ==>" + "Lat ==>" + LstringArrayList + "Lug ==>" + LstringArrayList2);
                     }
