@@ -42,13 +42,23 @@ public class loaddata extends AppCompatActivity {
             checkNetAndUpdateSQLite(false);
         }
 
+    }//Main method
+    private void deleteAllData() {
+
+        SQLiteDatabase objSQLite = openOrCreateDatabase("Busstop.db", MODE_PRIVATE, null);
+        objSQLite.delete("busstopTABLE", null, null);
+        objSQLite.delete("busTABLE", null, null);
+        objSQLite.delete("busrouteTABLE",null,null);
+
     }
+
 
     private void checkNetAndUpdateSQLite(boolean statusHaveDatabase) {
         String tag = "18AugV1";
         if (checkInternet()) {
             //Connected Internet OK
             Log.d(tag, "Connected Internet OK");
+            deleteAllData();
             refreshSQLite();
         } else {
             //Cannot Connected Internet Intent ==> Home.java
