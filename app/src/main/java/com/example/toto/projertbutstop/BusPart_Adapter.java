@@ -27,9 +27,11 @@ public class BusPart_Adapter extends BaseAdapter {
     @Override
     public int getCount() {
         if (busPast == null) {
-            return 0;
+            return 1;
+        } else {
+            return busPast.size();
         }
-        return busPast.size();
+
     }
 
     @Override
@@ -48,12 +50,15 @@ public class BusPart_Adapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.buspart_item, parent, false);
         TextView t = view.findViewById(R.id.item);
-        for (int a=0;a<busPast.size();a++) {
-
-            t.setText(busPast.get(i));
+        if (busPast == null) {
+            t.setText("รถประจำทางผ่าน");
+        } else {
+            for (int a = 0; a < busPast.size(); a++) {
+                t.setText("รถประจำทางสาย "+busPast.get(i));
+            }
         }
 
-        Log.d("20AugV5", "buspart   " + i);
+        Log.d("20AugV5", "buspart   " + busPast);
 
         return view;
     }

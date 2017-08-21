@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/item"
-        android:text="Test"
+        android:text="ไม่มีรถประจำทางผ่าน"
         android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

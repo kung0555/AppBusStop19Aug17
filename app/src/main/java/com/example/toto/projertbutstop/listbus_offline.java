@@ -1,12 +1,16 @@
 package com.example.toto.projertbutstop;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +25,7 @@ public class listbus_offline extends AppCompatActivity {
     private ArrayList<String> myTrueNumberBusEndStringArrayListinTown;
     private ArrayList<String> myTrueNumberBusEndStringArrayListoutTown;
     private ArrayList<String> BusPast;
+    String strNumBus;
     ListView listView;
 
     @Override
@@ -33,6 +38,7 @@ public class listbus_offline extends AppCompatActivity {
         myTrueNumberBusEndStringArrayListinTown = new ArrayList<String>();
         myTrueNumberBusEndStringArrayListoutTown = new ArrayList<String>();
         BusPast = new ArrayList<String>();
+
 
 
 
@@ -60,8 +66,22 @@ public class listbus_offline extends AppCompatActivity {
             }
 
         }
+        //createAdapter
         BusPart_Adapter adapter = new BusPart_Adapter(listbus_offline.this,BusPast);
         listView.setAdapter(adapter);
+        //Active Click
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                strNumBus = BusPast.get(i);
+                Log.d("21Aug1", "BusPastStart  " + strNumBus);
+                Intent intent = new Intent(listbus_offline.this, notifications_offline.class);
+                startActivity(intent);
+            }
+        });
+
+
         Log.d("20AugV2", "BusPastStart  " + BusPast);
         Log.d("20AugV2", "รถที่วิ่งผ่านป้าย Startไป ==> " + myTrueNumberBusStartStringArrayListinTown);
         Log.d("20AugV2", "รถที่วิ่งผ่านป้าย Endไป ==> " + myTrueNumberBusEndStringArrayListinTown);
@@ -220,6 +240,5 @@ public class listbus_offline extends AppCompatActivity {
 
     }
 
-    TeatBusPart teatBusPart = new TeatBusPart(BusPast);
 
 }   // Main Class
