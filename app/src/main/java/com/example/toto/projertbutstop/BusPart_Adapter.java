@@ -51,7 +51,7 @@ public class BusPart_Adapter extends BaseAdapter {
         view = inflater.inflate(R.layout.buspart_item, parent, false);
         TextView t = view.findViewById(R.id.item);
         if (busPast.isEmpty()) {
-            t.setText("ไม่มีสายรถประจำทางผ่าน กดเลือกเพื่อใส่ป้ายรถประจำทางอีกครั้ง");
+            t.setText("ใส่ป้ายรถประจำทางอีกครั้ง");
         } else {
             for (int a = 0; a < busPast.size(); a++) {
                 t.setText("รถประจำทางสาย "+busPast.get(i));
