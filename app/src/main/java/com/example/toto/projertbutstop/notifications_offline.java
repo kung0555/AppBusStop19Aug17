@@ -128,7 +128,7 @@ public class notifications_offline extends AppCompatActivity {
                 Log.d("LocationListener", "dis " + dis);
                 Toast.makeText(getApplicationContext(), "dis  "+dis, Toast.LENGTH_SHORT).show();
             }
-            if (dis.get(p) < 0.1 && dis.get(p) > 0.04) {
+            if (dis.get(p) < 0.07 && dis.get(p) > 0.04) {
                 if (x == 0) {
                     Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  "+NameBus.get(p), Toast.LENGTH_SHORT).show();
                     Log.d("Test19", "ใกล้ถึงป้าย." +NameBus.get(p)+"แล้ว");
