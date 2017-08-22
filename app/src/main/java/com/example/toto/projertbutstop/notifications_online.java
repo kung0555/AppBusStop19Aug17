@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Context;
+import android.os.Vibrator;
 
 public class notifications_online extends AppCompatActivity {
     String Busnum;
@@ -73,29 +75,31 @@ public class notifications_online extends AppCompatActivity {
         public void onLocationChanged(Location location) {
             latChanged = location.getLatitude();
             lngChanged = location.getLongitude();
-            Toast.makeText(getApplicationContext(), "LatChang  " + latChanged + "\nlngChang " + lngChanged, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "LatChang  " + latChanged + "\nlngChang " + lngChanged, Toast.LENGTH_SHORT).show();
             dis = distance(LatBusStopEnd, LngBusStopEnd, latChanged, lngChanged);
             Log.d("Test19", "ระยะทางTest" + dis + "กม.");
             int pp = (int) dis;
             Log.d("Test19", "Testpp" + pp + "กม.");
-            Toast.makeText(getApplicationContext(), "อีก  " + dis + "   ถึง   " + StopEnd, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "อีก  " + dis + "   ถึง   " + StopEnd, Toast.LENGTH_SHORT).show();
 
             if (dis < 0.1 && dis > 0.05) {
                 if (x == 0) {
-                    Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  "+StartEnd, Toast.LENGTH_SHORT).show();
                     Log.d("Test19", "ใกล้เข้าป้าย");
                     x = 1;
                     Log.d("Test19", "x ==>" + x);
                 }
                 if (x == 2) {
-                    Toast.makeText(getApplicationContext(), "เลยป้าย  ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "เลยป้าย  "+StartEnd, Toast.LENGTH_SHORT).show();
+                    Vibrator v3 = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    v3.vibrate(3000);
                     Log.d("Test19", "เลยป้าย");
                     Log.d("Test19", "x ==>" + x);
                 }
             }
             if (dis < 0.002) {
                 if (x == 1) {
-                    Toast.makeText(getApplicationContext(), "ถึงแล้วนะจ๊ะ  ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "ถึง "+StartEnd+"แล้ว  ", Toast.LENGTH_SHORT).show();
                     Log.d("Test19", "ถึงแล้วนะจ๊ะ ");
                     x = 2;
                     Log.d("Test19", "x ==>" + x);

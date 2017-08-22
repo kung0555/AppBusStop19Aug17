@@ -13,6 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Context;
+import android.os.Vibrator;
+
 
 import java.util.ArrayList;
 
@@ -142,6 +145,8 @@ public class notifications_offline extends AppCompatActivity {
                 if (dis.get(p) < 0.02) {
                     if (x == 2 && p < dis.size()) {
                         if (x == 2 && p == dis.size() - 1) {
+                            Vibrator v3 = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                            v3.vibrate(3000);
                             Toast.makeText(getApplicationContext(), "เลยป้าย  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
                             Log.d("Test19", "เลยป้าย" + NameBus.get(p));
                             Log.d("Test19", "x ==>" + x);
@@ -160,7 +165,7 @@ public class notifications_offline extends AppCompatActivity {
                             Log.d("Test19", "x ==>" + x);
                         }
                         x = 2;
-                        Toast.makeText(getApplicationContext(), "ถึงแล้วนะจ๊ะ  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "ถึง  " + NameBus.get(p)+"ป้าย", Toast.LENGTH_SHORT).show();
                         Log.d("Test19", "ถึงแล้วนะจ๊ะ " + NameBus.get(p));
                         Log.d("Test19", "x ==>" + x);
                         Log.d("Test19", "p ==>" + p);

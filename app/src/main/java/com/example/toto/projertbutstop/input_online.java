@@ -76,7 +76,7 @@ public class input_online extends AppCompatActivity {
 
             double lat = address.getLatitude();
             double lng = address.getLongitude();
-            Toast.makeText(this, locality + "ละติจูด" + lat + "ลองติจูด" + lng, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, locality + "ละติจูด" + lat + "ลองติจูด" + lng, Toast.LENGTH_LONG).show();
 
             if (address != null) {
                 Intent intent = new Intent(input_online.this, listbus_online.class);
