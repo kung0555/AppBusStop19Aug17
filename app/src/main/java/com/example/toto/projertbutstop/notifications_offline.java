@@ -126,8 +126,9 @@ public class notifications_offline extends AppCompatActivity {
             for (int a =0;a<LngBus.size();a++) {
                 dis.add((float) distance(TestLat.get(a), TestLng.get(a), latChanged, lngChanged));
                 Log.d("LocationListener", "dis " + dis);
+                Toast.makeText(getApplicationContext(), "dis  "+dis, Toast.LENGTH_SHORT).show();
             }
-            if (dis.get(p) < 0.2 && dis.get(p) > 0.1) {
+            if (dis.get(p) < 0.1 && dis.get(p) > 0.04) {
                 if (x == 0) {
                     Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  "+NameBus.get(p), Toast.LENGTH_SHORT).show();
                     Log.d("Test19", "ใกล้ถึงป้าย." +NameBus.get(p)+"แล้ว");
@@ -152,7 +153,7 @@ public class notifications_offline extends AppCompatActivity {
                     Log.d("Test19", "x ==>" + x);
                 }
             }
-            if (dis.get(p) < 0.05) {
+            if (dis.get(p) < 0.02) {
                 if (x == 1) {
                     Toast.makeText(getApplicationContext(), "ถึงแล้วนะจ๊ะ  "+NameBus.get(p), Toast.LENGTH_SHORT).show();
                     Log.d("Test19", "ถึงแล้วนะจ๊ะ "+NameBus.get(p));
