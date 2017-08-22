@@ -146,18 +146,18 @@ public class notifications_offline extends AppCompatActivity {
 
                     Log.d("Test19", "x ==>" + x);
                 }
-                if (x == 2&&p==dis.size()) {
+                if (x == 2&&p>dis.size()) {
                     Toast.makeText(getApplicationContext(), "เลยป้าย  "+NameBus.get(p), Toast.LENGTH_SHORT).show();
                     Log.d("Test19", "เลยป้าย"+NameBus.get(p));
                     Log.d("Test19", "x ==>" + x);
                 }
             }
-            if (dis.get(p) < 0.09) {
+            if (dis.get(p) < 0.05) {
                 if (x == 1) {
                     Toast.makeText(getApplicationContext(), "ถึงแล้วนะจ๊ะ  "+NameBus.get(p), Toast.LENGTH_SHORT).show();
                     Log.d("Test19", "ถึงแล้วนะจ๊ะ "+NameBus.get(p));
                     x = 2;
-                    if (p <= dis.size()) {
+                    if (p == dis.size()) {
                         p++;
                     }
 
