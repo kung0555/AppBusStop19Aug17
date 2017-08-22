@@ -65,14 +65,6 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/Out"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:text="ออกจาก
-แอปพลิเคชั่น"
             android:textSize="24dp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="368dp" />
