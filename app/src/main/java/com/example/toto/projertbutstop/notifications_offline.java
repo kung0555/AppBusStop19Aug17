@@ -31,7 +31,12 @@ public class notifications_offline extends AppCompatActivity {
     ArrayList<String> LngBus = new ArrayList<String>();
     ArrayList<String> NameBus = new ArrayList<String>();
     int x =0;
-    int testSumbus = SumBus;
+    int p = 0;
+
+
+
+    ArrayList<Double> TestLat = new ArrayList<Double>();
+    ArrayList<Double> TestLng = new ArrayList<Double>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,18 @@ public class notifications_offline extends AppCompatActivity {
         setContentView(R.layout.activity_notifications_offline);
         setupLocation();
         getValueIntent();
+        forTestLatlng();
+    }
+
+    private void forTestLatlng() {
+        for (int i = 0; i < LatBus.size(); i++) {
+            TestLat.add(Double.parseDouble(LatBus.get(i)));
+            Log.d("LocationListener", "TestLat " + TestLat);
+        }
+        for (int x = 0; x < LngBus.size(); x++) {
+            TestLng.add(Double.parseDouble(LngBus.get(x)));
+            Log.d("LocationListener", "TestLng " + TestLng);
+        }
     }
 
 
@@ -97,52 +114,49 @@ public class notifications_offline extends AppCompatActivity {
         return location;
     }
 
+
     public LocationListener locationListener = new LocationListener() {
+
         @Override
         public void onLocationChanged(Location location) {
             latChanged = location.getLatitude();
             lngChanged = location.getLongitude();
-            ArrayList<Double> TestLat = new ArrayList<Double>();
-            ArrayList<Double> TestLng = new ArrayList<Double>();
-            ArrayList<Double> dis = new ArrayList<Double>();
+            ArrayList<Float> dis = new ArrayList<Float>();
             Toast.makeText(getApplicationContext(), "LatChang  " + latChanged + "\nlngChang " + lngChanged, Toast.LENGTH_SHORT).show();
-            for (int i = 0; i < LatBus.size(); i++) {
-                TestLat.add(Double.parseDouble(LatBus.get(i)));
-                Log.d("LocationListener", "TestLat " + TestLat);
-            }
-            for (int x = 0; x < LngBus.size(); x++) {
-                TestLng.add(Double.parseDouble(LngBus.get(x)));
-                Log.d("LocationListener", "TestLng " + TestLng);
-            }
             for (int a =0;a<LngBus.size();a++) {
-                dis.add(distance(TestLat.get(a), TestLng.get(a), latChanged, lngChanged));
+                dis.add((float) distance(TestLat.get(a), TestLng.get(a), latChanged, lngChanged));
                 Log.d("LocationListener", "dis " + dis);
             }
-            for (int w =0; w <SumBus;w++) {
-                if (dis.get(w) < 0.1 && dis.get(w) > 0.05) {
-                    if (x == 0) {
-                        Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  ", Toast.LENGTH_SHORT).show();
-                        Log.d("Test19", "ใกล้เข้าป้าย");
-                        x = 1;
-                        Log.d("Test19", "x ==>" + x);
-                    }
-                    if (x == 2) {
-                        if (testSumbus==0){
-                        Toast.makeText(getApplicationContext(), "เลยป้าย  ", Toast.LENGTH_SHORT).show();
-                        Log.d("Test19", "เลยป้าย");
-                        Log.d("Test19", "testSumbus ==>" + testSumbus);}
-                    }
+            if (dis.get(p) < 0.3 && dis.get(p) > 0.1) {
+                if (x == 0) {
+                    Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  ", Toast.LENGTH_SHORT).show();
+                    Log.d("Test19", "ใกล้ถึงป้าย...แล้ว");
+                    x = 1;
+                    Log.d("Test19", "x ==>" + x);
                 }
-                if (dis.get(w) < 0.002) {
-                    if (x == 1) {
-                        Toast.makeText(getApplicationContext(), "ถึงแล้วนะจ๊ะ  ", Toast.LENGTH_SHORT).show();
-                        Log.d("Test19", "ถึงแล้วนะจ๊ะ ");
-                        testSumbus = testSumbus-1;
-                        x = 2;
-                        Log.d("Test19", "x ==>" + x);
-                    }
+                if (x == 2&&p!=dis.size()) {
+                    Toast.makeText(getApplicationContext(), "ป้ายต่อไปคือ  ", Toast.LENGTH_SHORT).show();
+                    x = 0;
+                    Log.d("Test19", "ป้ายต่อไปคือ");
+                    Log.d("Test19", "x ==>" + x);
+                }
+                if (x == 2&&p==dis.size()) {
+                    Toast.makeText(getApplicationContext(), "เลยป้าย  ", Toast.LENGTH_SHORT).show();
+                    Log.d("Test19", "เลยป้าย");
+                    Log.d("Test19", "x ==>" + x);
                 }
             }
+            if (dis.get(p) < 0.1) {
+                if (x == 1) {
+                    Toast.makeText(getApplicationContext(), "ถึงแล้วนะจ๊ะ  ", Toast.LENGTH_SHORT).show();
+                    Log.d("Test19", "ถึงแล้วนะจ๊ะ ");
+                    x = 2;
+                    p++;
+                    Log.d("Test19", "x ==>" + x);
+                }
+            }
+
+
 
         }
 

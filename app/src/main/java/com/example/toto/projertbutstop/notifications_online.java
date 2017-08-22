@@ -29,7 +29,7 @@ public class notifications_online extends AppCompatActivity {
     double latStartADouble;
     double lngStartADouble;
     double dis;
-    int x =0;
+    int x = 0;
     int a = 0;
 
     @Override
@@ -80,24 +80,24 @@ public class notifications_online extends AppCompatActivity {
             Log.d("Test19", "Testpp" + pp + "กม.");
             Toast.makeText(getApplicationContext(), "อีก  " + dis + "   ถึง   " + StopEnd, Toast.LENGTH_SHORT).show();
 
-                if (dis < 0.1&&dis>0.05) {
-                    if (x==0) {
-                        Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  " , Toast.LENGTH_SHORT).show();
-                        Log.d("Test19", "ใกล้เข้าป้าย");
-                        x=1;
-                        Log.d("Test19", "x ==>" + x);
-                    }
-                    if (x == 2) {
-                        Toast.makeText(getApplicationContext(), "เลยป้าย  " , Toast.LENGTH_SHORT).show();
-                        Log.d("Test19", "เลยป้าย");
-                        Log.d("Test19", "x ==>" + x);
-                    }
+            if (dis < 0.1 && dis > 0.05) {
+                if (x == 0) {
+                    Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  ", Toast.LENGTH_SHORT).show();
+                    Log.d("Test19", "ใกล้เข้าป้าย");
+                    x = 1;
+                    Log.d("Test19", "x ==>" + x);
                 }
+                if (x == 2) {
+                    Toast.makeText(getApplicationContext(), "เลยป้าย  ", Toast.LENGTH_SHORT).show();
+                    Log.d("Test19", "เลยป้าย");
+                    Log.d("Test19", "x ==>" + x);
+                }
+            }
             if (dis < 0.002) {
-                if (x==1) {
-                    Toast.makeText(getApplicationContext(), "ถึงแล้วนะจ๊ะ  " , Toast.LENGTH_SHORT).show();
+                if (x == 1) {
+                    Toast.makeText(getApplicationContext(), "ถึงแล้วนะจ๊ะ  ", Toast.LENGTH_SHORT).show();
                     Log.d("Test19", "ถึงแล้วนะจ๊ะ ");
-                    x=2;
+                    x = 2;
                     Log.d("Test19", "x ==>" + x);
                 }
             }
