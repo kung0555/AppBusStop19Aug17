@@ -38,6 +38,7 @@ public class notifications_offline extends AppCompatActivity {
 
 
 
+
     ArrayList<Double> TestLat = new ArrayList<Double>();
     ArrayList<Double> TestLng = new ArrayList<Double>();
 
@@ -76,12 +77,10 @@ public class notifications_offline extends AppCompatActivity {
         Log.d(tag, "LngBus ==>" + LngBus);
         Log.d(tag, "NameBus ==>" + NameBus);
         Log.d(tag, "NameBus ==>" + Bus);
-
         TextView tg1 = (TextView) findViewById(R.id.NumberbusOff);
         TextView tg2 = (TextView) findViewById(R.id.Namebus1Off);
         TextView tg3 = (TextView) findViewById(R.id.Namebus2Off);
         TextView tg4 = (TextView) findViewById(R.id.NumberbusstopOff);
-
         tg1.setText("รถประจำทางสาย " + Bus);
         tg2.setText("ชื่อป้ายรถประจำทางปัจจุบัน : " + NameBus.get(0));
         tg3.setText("ชื่อป้ายรถประจำทางถัดไป : " + NameBus.get(1));
@@ -125,6 +124,10 @@ public class notifications_offline extends AppCompatActivity {
             try {
                 latChanged = location.getLatitude();
                 lngChanged = location.getLongitude();
+                int SumBus2=SumBus;
+                TextView gg2 = (TextView) findViewById(R.id.Namebus1Off);
+                TextView gg3 = (TextView) findViewById(R.id.Namebus2Off);
+                TextView gg4 = (TextView) findViewById(R.id.NumberbusstopOff);
                 ArrayList<Float> dis = new ArrayList<Float>();
                 //Toast.makeText(getApplicationContext(), "LatChang  " + latChanged + "\nlngChang " + lngChanged, Toast.LENGTH_SHORT).show();
                 for (int a = 0; a < LngBus.size(); a++) {
@@ -134,6 +137,7 @@ public class notifications_offline extends AppCompatActivity {
                 }
                 if (dis.get(p) < 0.07 && dis.get(p) > 0.04) {
                     if (x == 0) {
+
                         Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
                         Log.d("Test19", "ใกล้ถึงป้าย." + NameBus.get(p) + "แล้ว");
                         x = 1;
@@ -165,11 +169,15 @@ public class notifications_offline extends AppCompatActivity {
                             Log.d("Test19", "x ==>" + x);
                         }
                         x = 2;
+                        gg2.setText("ชื่อป้ายรถประจำทางปัจจุบัน : " + NameBus.get(p));
+                        SumBus2--;
                         Toast.makeText(getApplicationContext(), "ถึง  " + NameBus.get(p)+"ป้าย", Toast.LENGTH_SHORT).show();
                         Log.d("Test19", "ถึงแล้วนะจ๊ะ " + NameBus.get(p));
                         Log.d("Test19", "x ==>" + x);
                         Log.d("Test19", "p ==>" + p);
                         if (p < dis.size() - 1) {
+                            gg4.setText("จำนวนป้ายที่ผ่านอีก "+SumBus2+" ป้าย");
+                            gg3.setText("ชื่อป้ายรถประจำทางถัดไป : " + NameBus.get(p + 1));
                             Toast.makeText(getApplicationContext(), "ป้ายต่อไปคือ  " + NameBus.get(p + 1), Toast.LENGTH_SHORT).show();
                             Log.d("Test19", "ป้ายต่อไปคือ" + NameBus.get(p + 1));
                             Log.d("Test19", "p ==>" + p);

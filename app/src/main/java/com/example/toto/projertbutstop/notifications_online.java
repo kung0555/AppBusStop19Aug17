@@ -34,6 +34,7 @@ public class notifications_online extends AppCompatActivity {
     int x = 0;
     int a = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
