@@ -22,12 +22,17 @@ public class notifications_offline extends AppCompatActivity {
     double lngChanged;
     double latStartADouble;
     double lngStartADouble;
-    double dis;
+
+
     String Bus;
     int SumBus;
+    String strSumBut;
     ArrayList<String> LatBus = new ArrayList<String>();
     ArrayList<String> LngBus = new ArrayList<String>();
     ArrayList<String> NameBus = new ArrayList<String>();
+    int x =0;
+    int testSumbus = SumBus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,29 +45,30 @@ public class notifications_offline extends AppCompatActivity {
     private void getValueIntent() {
 
         String tag = "getValueIntent";
-        SumBus = getIntent().getIntExtra("SumBus",0);
+        SumBus = getIntent().getIntExtra("SumBus", 0);
         LatBus = getIntent().getStringArrayListExtra("LatBus");
         LngBus = getIntent().getStringArrayListExtra("LngBus");
         NameBus = getIntent().getStringArrayListExtra("NameBus");
         Bus = getIntent().getStringExtra("Bus");
-        String strSumBut = Integer.toString(SumBus);
+        strSumBut = Integer.toString(SumBus);
         //Log.d(tag,"SumBus ==>"+ SumBus);
-        Log.d(tag,"LatBus ==>"+ LatBus);
-        Log.d(tag,"LngBus ==>"+ LngBus);
-        Log.d(tag,"NameBus ==>"+ NameBus);
-        Log.d(tag,"NameBus ==>"+ Bus);
+        Log.d(tag, "LatBus ==>" + LatBus);
+        Log.d(tag, "LngBus ==>" + LngBus);
+        Log.d(tag, "NameBus ==>" + NameBus);
+        Log.d(tag, "NameBus ==>" + Bus);
 
         TextView tg1 = (TextView) findViewById(R.id.NumberbusOff);
         TextView tg2 = (TextView) findViewById(R.id.Namebus1Off);
         TextView tg3 = (TextView) findViewById(R.id.Namebus2Off);
         TextView tg4 = (TextView) findViewById(R.id.NumberbusstopOff);
 
-        tg1.setText("รถประจำทางสาย "+Bus);
-        tg2.setText("ชื่อป้ายรถประจำทางปัจจุบัน : "+NameBus.get(0));
-        tg3.setText("ชื่อป้ายรถประจำทางถัดไป : "+NameBus.get(1));
-        tg4.setText("ต้องผ่านอีก "+strSumBut+" ป้าย");
+        tg1.setText("รถประจำทางสาย " + Bus);
+        tg2.setText("ชื่อป้ายรถประจำทางปัจจุบัน : " + NameBus.get(0));
+        tg3.setText("ชื่อป้ายรถประจำทางถัดไป : " + NameBus.get(1));
+        tg4.setText("ต้องผ่านอีก " + strSumBut + " ป้าย");
 
     }
+
     private void setupLocation() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -70,6 +76,7 @@ public class notifications_offline extends AppCompatActivity {
         criteria.setAltitudeRequired(false);
         criteria.setBearingRequired(false);
     }
+
     public Location myFindLocation(String strProvider) {
 
         Location location = null;
@@ -89,14 +96,52 @@ public class notifications_offline extends AppCompatActivity {
         }
         return location;
     }
+
     public LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
             latChanged = location.getLatitude();
             lngChanged = location.getLongitude();
+            ArrayList<Double> TestLat = new ArrayList<Double>();
+            ArrayList<Double> TestLng = new ArrayList<Double>();
+            ArrayList<Double> dis = new ArrayList<Double>();
             Toast.makeText(getApplicationContext(), "LatChang  " + latChanged + "\nlngChang " + lngChanged, Toast.LENGTH_SHORT).show();
             for (int i = 0; i < LatBus.size(); i++) {
-                //dis = distance(LatBus.get(i), LngBus.get(i), latChanged, lngChanged);
+                TestLat.add(Double.parseDouble(LatBus.get(i)));
+                Log.d("LocationListener", "TestLat " + TestLat);
+            }
+            for (int x = 0; x < LngBus.size(); x++) {
+                TestLng.add(Double.parseDouble(LngBus.get(x)));
+                Log.d("LocationListener", "TestLng " + TestLng);
+            }
+            for (int a =0;a<LngBus.size();a++) {
+                dis.add(distance(TestLat.get(a), TestLng.get(a), latChanged, lngChanged));
+                Log.d("LocationListener", "dis " + dis);
+            }
+            for (int w =0; w <SumBus;w++) {
+                if (dis.get(w) < 0.1 && dis.get(w) > 0.05) {
+                    if (x == 0) {
+                        Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  ", Toast.LENGTH_SHORT).show();
+                        Log.d("Test19", "ใกล้เข้าป้าย");
+                        x = 1;
+                        Log.d("Test19", "x ==>" + x);
+                    }
+                    if (x == 2) {
+                        if (testSumbus==0){
+                        Toast.makeText(getApplicationContext(), "เลยป้าย  ", Toast.LENGTH_SHORT).show();
+                        Log.d("Test19", "เลยป้าย");
+                        Log.d("Test19", "testSumbus ==>" + testSumbus);}
+                    }
+                }
+                if (dis.get(w) < 0.002) {
+                    if (x == 1) {
+                        Toast.makeText(getApplicationContext(), "ถึงแล้วนะจ๊ะ  ", Toast.LENGTH_SHORT).show();
+                        Log.d("Test19", "ถึงแล้วนะจ๊ะ ");
+                        testSumbus = testSumbus-1;
+                        x = 2;
+                        Log.d("Test19", "x ==>" + x);
+                    }
+                }
             }
 
         }
@@ -116,6 +161,7 @@ public class notifications_offline extends AppCompatActivity {
 
         }
     };
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -136,6 +182,7 @@ public class notifications_offline extends AppCompatActivity {
 
         }
     }
+
     //หาระยะทาง
     private static double distance(double lat1, double lon1, double lat2, double lon2) {
         double theta = lon1 - lon2;
@@ -146,6 +193,7 @@ public class notifications_offline extends AppCompatActivity {
 
         return (dist);
     }
+
     private static double rad2deg(double rad) {
 
         return (rad * 180 / Math.PI);
