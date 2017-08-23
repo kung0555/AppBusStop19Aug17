@@ -33,10 +33,9 @@ public class notifications_offline extends AppCompatActivity {
     ArrayList<String> LatBus = new ArrayList<String>();
     ArrayList<String> LngBus = new ArrayList<String>();
     ArrayList<String> NameBus = new ArrayList<String>();
-    int x =0;
+    int x = 0;
     int p = 0;
-
-
+    int SumBus2;
 
 
     ArrayList<Double> TestLat = new ArrayList<Double>();
@@ -71,7 +70,8 @@ public class notifications_offline extends AppCompatActivity {
         LngBus = getIntent().getStringArrayListExtra("LngBus");
         NameBus = getIntent().getStringArrayListExtra("NameBus");
         Bus = getIntent().getStringExtra("Bus");
-        strSumBut = Integer.toString(SumBus);
+        strSumBut = Integer.toString(SumBus-1);
+        SumBus2 = SumBus - 1;
         //Log.d(tag,"SumBus ==>"+ SumBus);
         Log.d(tag, "LatBus ==>" + LatBus);
         Log.d(tag, "LngBus ==>" + LngBus);
@@ -124,7 +124,6 @@ public class notifications_offline extends AppCompatActivity {
             try {
                 latChanged = location.getLatitude();
                 lngChanged = location.getLongitude();
-                int SumBus2=SumBus;
                 TextView gg2 = (TextView) findViewById(R.id.Namebus1Off);
                 TextView gg3 = (TextView) findViewById(R.id.Namebus2Off);
                 TextView gg4 = (TextView) findViewById(R.id.NumberbusstopOff);
@@ -135,59 +134,104 @@ public class notifications_offline extends AppCompatActivity {
                     Log.d("LocationListener", "dis " + dis);
                     //Toast.makeText(getApplicationContext(), "dis  "+dis, Toast.LENGTH_SHORT).show();
                 }
-                if (dis.get(p) < 0.07 && dis.get(p) > 0.04) {
-                    if (x == 0) {
+                if (p == 0 && dis.get(p) < 0.02) {
+                    Log.d("Test19", "ป้ายบัจุบัน " + NameBus.get(p));
+                    Toast.makeText(getApplicationContext(), "ป้ายบัจุบัน  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
+                    p++;
+                    if (dis.get(p) < 0.07 && dis.get(p) > 0.04) {
+                        if (x == 0) {
 
-                        Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
-                        Log.d("Test19", "ใกล้ถึงป้าย." + NameBus.get(p) + "แล้ว");
-                        x = 1;
-                        Log.d("Test19", "x ==>" + x);
-                        Log.d("Test19", "p ==>" + p);
-                    }
-
-                }
-                if (dis.get(p) < 0.02) {
-                    if (x == 2 && p < dis.size()) {
-                        if (x == 2 && p == dis.size() - 1) {
-                            Vibrator v3 = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                            v3.vibrate(3000);
-                            Toast.makeText(getApplicationContext(), "เลยป้าย  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
-                            Log.d("Test19", "เลยป้าย" + NameBus.get(p));
+                            Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
+                            Log.d("Test19", "ใกล้ถึงป้าย." + NameBus.get(p) + "แล้ว");
+                            x = 1;
                             Log.d("Test19", "x ==>" + x);
                             Log.d("Test19", "p ==>" + p);
-
                         }
-                        x = 0;
-                        p = p + 1;
-                        Log.d("Test19", "x ==>" + x);
+
                     }
-                    if (x == 1) {
+                    if (dis.get(p) < 0.02) {
                         if (x == 2 && p < dis.size()) {
+                            if (x == 2 && p == dis.size() - 1) {
+                                Vibrator v3 = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                v3.vibrate(3000);
+                                Toast.makeText(getApplicationContext(), "เลยป้าย  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
+                                Log.d("Test19", "เลยป้าย" + NameBus.get(p));
+                                Log.d("Test19", "x ==>" + x);
+                                Log.d("Test19", "p ==>" + p);
 
+                            }
                             x = 0;
-                            p++;
+                            p = p + 1;
+                            SumBus2--;
+                            gg4.setText("จำนวนป้ายที่เหลือ " + SumBus2 + " ป้าย");
+                            Log.d("Test19", "SumBus2 ==>" + SumBus2);
                             Log.d("Test19", "x ==>" + x);
                         }
-                        x = 2;
-                        gg2.setText("ชื่อป้ายรถประจำทางปัจจุบัน : " + NameBus.get(p));
-                        SumBus2--;
-                        Toast.makeText(getApplicationContext(), "ถึง  " + NameBus.get(p)+"ป้าย", Toast.LENGTH_SHORT).show();
-                        Log.d("Test19", "ถึงแล้วนะจ๊ะ " + NameBus.get(p));
-                        Log.d("Test19", "x ==>" + x);
-                        Log.d("Test19", "p ==>" + p);
-                        if (p < dis.size() - 1) {
-                            gg4.setText("จำนวนป้ายที่ผ่านอีก "+SumBus2+" ป้าย");
-                            gg3.setText("ชื่อป้ายรถประจำทางถัดไป : " + NameBus.get(p + 1));
-                            Toast.makeText(getApplicationContext(), "ป้ายต่อไปคือ  " + NameBus.get(p + 1), Toast.LENGTH_SHORT).show();
-                            Log.d("Test19", "ป้ายต่อไปคือ" + NameBus.get(p + 1));
-                            Log.d("Test19", "p ==>" + p);
+                        if (x == 1) {
+                            x = 2;
+                            gg2.setText("ชื่อป้ายรถประจำทางปัจจุบัน : " + NameBus.get(p));
+                            Toast.makeText(getApplicationContext(), "ถึง  " + NameBus.get(p) + "ป้าย", Toast.LENGTH_SHORT).show();
+                            Log.d("Test19", "ถึงแล้วนะจ๊ะ " + NameBus.get(p));
                             Log.d("Test19", "x ==>" + x);
+                            Log.d("Test19", "p ==>" + p);
+                            if (p < dis.size() - 1) {
+                                gg3.setText("ชื่อป้ายรถประจำทางถัดไป : " + NameBus.get(p + 1));
+                                Toast.makeText(getApplicationContext(), "ป้ายต่อไปคือ  " + NameBus.get(p + 1), Toast.LENGTH_SHORT).show();
+                                Log.d("Test19", "ป้ายต่อไปคือ" + NameBus.get(p + 1));
+                                Log.d("Test19", "p ==>" + p);
+                                Log.d("Test19", "x ==>" + x);
+                            }
+                        }
+                    }
+                } else {
+                    if (dis.get(p) < 0.07 && dis.get(p) > 0.04) {
+                        if (x == 0) {
+
+                            Toast.makeText(getApplicationContext(), "ใกล้ถึงแล้ว  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
+                            Log.d("Test19", "ใกล้ถึงป้าย." + NameBus.get(p) + "แล้ว");
+                            x = 1;
+                            Log.d("Test19", "x ==>" + x);
+                            Log.d("Test19", "p ==>" + p);
                         }
 
                     }
+                    if (dis.get(p) < 0.02) {
+                        if (x == 2 && p < dis.size()) {
+                            if (x == 2 && p == dis.size() - 1) {
+                                Vibrator v3 = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                v3.vibrate(3000);
+                                Toast.makeText(getApplicationContext(), "เลยป้าย  " + NameBus.get(p), Toast.LENGTH_SHORT).show();
+                                Log.d("Test19", "เลยป้าย" + NameBus.get(p));
+                                Log.d("Test19", "x ==>" + x);
+                                Log.d("Test19", "p ==>" + p);
+                            }
+                            x = 0;
+                            p = p + 1;
+                            SumBus2--;
+                            gg4.setText("จำนวนป้ายที่เหลือ " + SumBus2 + " ป้าย");
+                            Log.d("Test19", "SumBus2 ==>" + SumBus2);
+                            Log.d("Test19", "x ==>" + x);
+                        }
+                        if (x == 1) {
+                            x = 2;
+                            gg2.setText("ชื่อป้ายรถประจำทางปัจจุบัน : " + NameBus.get(p));
+                            Toast.makeText(getApplicationContext(), "ถึง  " + NameBus.get(p) + "ป้าย", Toast.LENGTH_SHORT).show();
+                            Log.d("Test19", "ถึงแล้วนะจ๊ะ " + NameBus.get(p));
+                            Log.d("Test19", "x ==>" + x);
+                            Log.d("Test19", "p ==>" + p);
+                            if (p < dis.size() - 1) {
+                                gg3.setText("ชื่อป้ายรถประจำทางถัดไป : " + NameBus.get(p + 1));
+                                Toast.makeText(getApplicationContext(), "ป้ายต่อไปคือ  " + NameBus.get(p + 1), Toast.LENGTH_SHORT).show();
+                                Log.d("Test19", "ป้ายต่อไปคือ" + NameBus.get(p + 1));
+                                Log.d("Test19", "p ==>" + p);
+                                Log.d("Test19", "x ==>" + x);
+                            }
 
+                        }
+
+                    }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
